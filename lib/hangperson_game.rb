@@ -7,9 +7,13 @@ class HangpersonGame
 
   # def initialize()
   # end
+
+  attr_accessor :word, :guesses, :wrong_guesses
   
   def initialize(word)
     @word = word
+    @guesses = ''
+    @wrong_guesses = ''
   end
 
   # You can test it by running $ bundle exec irb -I. -r app.rb
@@ -22,6 +26,28 @@ class HangpersonGame
     Net::HTTP.new('watchout4snakes.com').start { |http|
       return http.post(uri, "").body
     }
+  end
+
+  def guess(character)
+    if /[^a-zA-Z]/.match(character) || character.nil? || character.empty?
+      raise ArgumentError, "#{character} is not a valid character"
+    end
+    regex = Regexp.new(character, true)
+    if regex.match(@word)
+      if !regex.match(@guesses)
+        @guesses += character
+        return true
+      else
+        return false
+      end
+    else
+      if !regex.match(@wrong_guesses)
+        @wrong_guesses += character
+        return true
+      else
+        return false
+      end
+    end
   end
 
 end

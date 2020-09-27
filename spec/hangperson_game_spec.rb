@@ -9,7 +9,7 @@ describe HangpersonGame do
     end
   end
 
-  describe 'new', :pending => true do
+  describe 'new', :pending => false do
     it "takes a parameter and returns a HangpersonGame object" do      
       @hangpersonGame = HangpersonGame.new('glorp')
       expect(@hangpersonGame).to be_an_instance_of(HangpersonGame)
@@ -19,17 +19,17 @@ describe HangpersonGame do
     end
   end
 
-  describe 'guessing', :pending => true do
+  describe 'guessing', :pending => false do
     context 'correctly' do
       before :each do
         @game = HangpersonGame.new('garply')
         @valid = @game.guess('a')
       end
-      it 'changes correct guess list', :pending => true do
+      it 'changes correct guess list', :pending => false do
         expect(@game.guesses).to eq('a')
         expect(@game.wrong_guesses).to eq('')
       end
-      it 'returns true', :pending => true do
+      it 'returns true', :pending => false do
         expect(@valid).not_to be false
       end
     end
@@ -38,11 +38,11 @@ describe HangpersonGame do
         @game = HangpersonGame.new('garply')
         @valid = @game.guess('z')
       end
-      it 'changes wrong guess list', :pending => true do
+      it 'changes wrong guess list', :pending => false do
         expect(@game.guesses).to eq('')
         expect(@game.wrong_guesses).to eq('z')
       end
-      it 'returns true', :pending => true do
+      it 'returns true', :pending => false do
         expect(@valid).not_to be false
       end
     end
@@ -51,19 +51,19 @@ describe HangpersonGame do
         @game = HangpersonGame.new('garply')
         guess_several_letters(@game, 'aq')
       end
-      it 'does not change correct guess list', :pending => true do
+      it 'does not change correct guess list', :pending => false do
         @game.guess('a')
         expect(@game.guesses).to eq('a')
       end
-      it 'does not change wrong guess list', :pending => true do
+      it 'does not change wrong guess list', :pending => false do
         @game.guess('q')
         expect(@game.wrong_guesses).to eq('q')
       end
-      it 'returns false', :pending => true do
+      it 'returns false', :pending => false do
         expect(@game.guess('a')).to be false
         expect(@game.guess('q')).to be false
       end
-      it 'is case insensitive', :pending => true do
+      it 'is case insensitive', :pending => false do
         expect(@game.guess('A')).to be false
         expect(@game.guess('Q')).to be false
         expect(@game.guesses).not_to include('A')
@@ -74,13 +74,13 @@ describe HangpersonGame do
       before :each do
         @game = HangpersonGame.new('foobar')
       end
-      it 'throws an error when empty', :pending => true do
+      it 'throws an error when empty', :pending => false do
         expect { @game.guess('') }.to raise_error(ArgumentError)
       end
-      it 'throws an error when not a letter', :pending => true do
+      it 'throws an error when not a letter', :pending => false do
         expect { @game.guess('%') }.to raise_error(ArgumentError)
       end
-      it 'throws an error when nil', :pending => true do
+      it 'throws an error when nil', :pending => false do
         expect { @game.guess(nil) }.to raise_error(ArgumentError)
       end
     end
