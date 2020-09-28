@@ -50,4 +50,24 @@ class HangpersonGame
     end
   end
 
+  def word_with_guesses
+    result = ''
+    @word.split('').each do |character|
+      regex = Regexp.new(character, true)
+      result += regex.match(@guesses) ? character : '-'
+    end
+    result
+  end
+
+  def check_win_or_lose
+    regex = Regexp.new('-', true)
+    if @wrong_guesses.length >= 7
+      return :lose
+    elsif !regex.match(word_with_guesses)
+      return :win
+    else
+      return :play
+    end
+  end
+
 end
